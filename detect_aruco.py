@@ -92,23 +92,26 @@ if __name__ == '__main__':
           height = abs(top_left[1] - bottom_right[1])
           dim = (width, height)
 
-          # This drawing only consider one orientation of the marker
-          if marker_id == 5:
-            overlay_charmander = cv2.imread('data/charmander.png')
-            overlay_charmander = cv2.resize(overlay_charmander, dim, interpolation = cv2.INTER_AREA)
-            frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_charmander
-          elif marker_id == 1:
-            overlay_bulbasaur = cv2.imread('data/bulbasaur.png')
-            overlay_bulbasaur = cv2.resize(overlay_bulbasaur, dim, interpolation = cv2.INTER_AREA)
-            frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_bulbasaur
-          elif marker_id == 10:
-            overlay_pikachu = cv2.imread('data/pikachu.png')
-            overlay_pikachu = cv2.resize(overlay_pikachu, dim, interpolation = cv2.INTER_AREA)
-            frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_pikachu
-          elif marker_id == 2:
-            overlay_squirtle = cv2.imread('data/squirtle.png')
-            overlay_squirtle = cv2.resize(overlay_squirtle, dim, interpolation = cv2.INTER_AREA)
-            frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_squirtle
+          try:
+              # This drawing only consider one orientation of the marker
+              if marker_id == 5:
+                overlay_charmander = cv2.imread('data/charmander.png')
+                overlay_charmander = cv2.resize(overlay_charmander, dim, interpolation = cv2.INTER_AREA)
+                frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_charmander
+              elif marker_id == 1:
+                overlay_bulbasaur = cv2.imread('data/bulbasaur.png')
+                overlay_bulbasaur = cv2.resize(overlay_bulbasaur, dim, interpolation = cv2.INTER_AREA)
+                frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_bulbasaur
+              elif marker_id == 10:
+                overlay_pikachu = cv2.imread('data/pikachu.png')
+                overlay_pikachu = cv2.resize(overlay_pikachu, dim, interpolation = cv2.INTER_AREA)
+                frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_pikachu
+              elif marker_id == 2:
+                overlay_squirtle = cv2.imread('data/squirtle.png')
+                overlay_squirtle = cv2.resize(overlay_squirtle, dim, interpolation = cv2.INTER_AREA)
+                frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_squirtle
+          except:
+               print("Put the markers inside the scene")
         
         else:
           # Draw the bounding box of the ArUco detection and center
