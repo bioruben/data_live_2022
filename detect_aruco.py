@@ -58,7 +58,7 @@ if __name__ == '__main__':
   while(True):
   
     # Get Frame
-    ret, frame = cap.read()  
+    ret, frame = cap.read()
      
     # Detect ArUco markers in the video frame
     (corners, ids, rejected) = cv2.aruco.detectMarkers(
@@ -93,23 +93,53 @@ if __name__ == '__main__':
           dim = (width, height)
 
           try:
+              bH, bW = frame.shape[:2]
+              empty = 0 * np.ones((bH, bW, 3), dtype=np.uint8)
               # This drawing only consider one orientation of the marker
               if marker_id == 5:
                 overlay_charmander = cv2.imread('data/charmander.png')
                 overlay_charmander = cv2.resize(overlay_charmander, dim, interpolation = cv2.INTER_AREA)
-                frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_charmander
+
+                empty[:height, :width] = overlay_charmander
+                _inp = np.float32([[0, 0], [width, 0], [width, height], [0, height]])
+                _out = np.float32([top_left, top_right, bottom_right, bottom_left])
+                M = cv2.getPerspectiveTransform(_inp, _out)
+                transformed = cv2.warpPerspective(empty, M, (bW, bH))
+                frame[np.where(transformed != 0)] = transformed[np.where(transformed != 0)]
+
               elif marker_id == 1:
                 overlay_bulbasaur = cv2.imread('data/bulbasaur.png')
                 overlay_bulbasaur = cv2.resize(overlay_bulbasaur, dim, interpolation = cv2.INTER_AREA)
-                frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_bulbasaur
+
+                empty[:height, :width] = overlay_bulbasaur
+                _inp = np.float32([[0, 0], [width, 0], [width, height], [0, height]])
+                _out = np.float32([top_left, top_right, bottom_right, bottom_left])
+                M = cv2.getPerspectiveTransform(_inp, _out)
+                transformed = cv2.warpPerspective(empty, M, (bW, bH))
+                frame[np.where(transformed != 0)] = transformed[np.where(transformed != 0)]
+
               elif marker_id == 10:
                 overlay_pikachu = cv2.imread('data/pikachu.png')
                 overlay_pikachu = cv2.resize(overlay_pikachu, dim, interpolation = cv2.INTER_AREA)
-                frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_pikachu
+
+                empty[:height, :width] = overlay_pikachu
+                _inp = np.float32([[0, 0], [width, 0], [width, height], [0, height]])
+                _out = np.float32([top_left, top_right, bottom_right, bottom_left])
+                M = cv2.getPerspectiveTransform(_inp, _out)
+                transformed = cv2.warpPerspective(empty, M, (bW, bH))
+                frame[np.where(transformed != 0)] = transformed[np.where(transformed != 0)]
+
               elif marker_id == 2:
                 overlay_squirtle = cv2.imread('data/squirtle.png')
                 overlay_squirtle = cv2.resize(overlay_squirtle, dim, interpolation = cv2.INTER_AREA)
-                frame[top_left[1]:top_left[1]+height, bottom_right[0]-width:bottom_right[0]] = overlay_squirtle
+
+                empty[:height, :width] = overlay_squirtle
+                _inp = np.float32([[0, 0], [width, 0], [width, height], [0, height]])
+                _out = np.float32([top_left, top_right, bottom_right, bottom_left])
+                M = cv2.getPerspectiveTransform(_inp, _out)
+                transformed = cv2.warpPerspective(empty, M, (bW, bH))
+                frame[np.where(transformed != 0)] = transformed[np.where(transformed != 0)]
+
           except:
                print("Put the markers inside the scene")
         
@@ -135,7 +165,7 @@ if __name__ == '__main__':
     # exit this loop
     k = cv2.waitKey(1)
     if k==27:
-      break    
+      break
   
   # Close down the video stream
   cap.release()
