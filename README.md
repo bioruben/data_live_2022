@@ -16,14 +16,23 @@ Las versiones de las dependencias utilizadas cuando se realizaron estos demos so
 ## Codes
 
 - generate_aruco.py
+
 	Permite generar los marcadores para su impresión de acuerdo a su código.
+
 - detect_aruco.py
+
 	Permite detecta los marcadores y que tiene un flag para detectar los pokemones.
+
 - matching_video.py
+
 	Ejemplo que muestra el matching de descriptores.
+
 - trainning_cnn.py
+
 	Código de una CNN básica para entrenarla desde cero usando Keras.
+
 - test_cnn.py
+
 	Código que prueba la CNN entrenada en el paso anterior.
 
 La útlima actualización se hizo el 10/07/2022, se actualizó el README.
